@@ -1,0 +1,32 @@
+/**
+ * @param {*} obj
+ * @param {*} classFunction
+ * @return {boolean}
+ */
+var checkIfInstanceOf = function(obj, classFunction) {
+
+    if (obj === null || obj === undefined) {
+        return false;
+    }
+
+    if (typeof classFunction !== "function") {
+        return false;
+    }
+
+    if (obj.constructor === classFunction) {
+        return true;
+    }
+
+    let proto = Object.getPrototypeOf(obj);
+
+    while (proto !== null) {
+
+        if (proto === classFunction.prototype) {
+            return true;
+        }
+
+        proto = Object.getPrototypeOf(proto);
+    }
+
+    return false;
+};
